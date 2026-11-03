@@ -7,6 +7,7 @@ class ProyectoProvider extends ChangeNotifier {
 
   List<Verificacion> get verificaciones => _verificaciones;
 
+  // Obtener la última versión de cada modelo.
   List<Verificacion> get ultimasVersiones {
     Map<String, Verificacion> mapa = {};
 
@@ -20,15 +21,29 @@ class ProyectoProvider extends ChangeNotifier {
     return mapa.values.toList();
   }
 
+  // Registrar una nueva verificación.
   void agregarVerificacion(Verificacion nueva) {
+    // Validar el nombre del verificador.
     if (nueva.verificador.trim().length < 3) {
       throw Exception("Verificador mínimo 3 letras.");
     }
 
+    // Validar las observaciones de los criterios incumplidos.
+    for (final criterio in nueva.criterios) {
+      if (!criterio.validarObservacion()) {
+        throw Exception(
+          "El criterio ${criterio.codigo} requiere "
+          "una observación de mínimo 15 caracteres.",
+        );
+      }
+    }
+
+    // Obtener las verificaciones anteriores del mismo modelo.
     var previas = _verificaciones
         .where((v) => v.modelo == nueva.modelo)
         .toList();
 
+    // Validar que la versión sea superior.
     if (previas.isNotEmpty) {
       int maxV = previas
           .map((v) => v.version)
