@@ -17,11 +17,25 @@ class ReporteScreen extends StatelessWidget {
       );
     }
 
+    String estadoProyecto = 'Aprobado con observaciones';
+    if (ultimas.length < 4) {
+      estadoProyecto = 'En proceso';
+    } else if (ultimas.any((v) => v.estado == 'Rechazado')) {
+      estadoProyecto = 'Requiere correcciones';
+    } else if (ultimas.every((v) => v.estado == 'Aprobado')) {
+      estadoProyecto = 'Aprobado';
+    }
+
     return Scaffold(
       appBar: AppBar(title: const Text('Reporte General')),
-      body: const Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Text('Calculando reporte...'),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Estado del Proyecto: $estadoProyecto', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          ],
+        ),
       ),
     );
   }
