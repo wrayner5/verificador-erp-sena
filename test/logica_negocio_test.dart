@@ -236,6 +236,29 @@ void main() {
       expect(provider.verificaciones.length, 2);
     });
 
+    test('No permite guardar observaciones menores a 15 caracteres', () {
+      final provider = ProyectoProvider();
+      addTearDown(provider.dispose);
+
+      final criterio = crearCriterio(
+        critico: false,
+        cumple: false,
+      );
+
+      criterio.observacion = 'Observacion';
+
+      final verificacion = crearVerificacion(
+        modelo: 'Clases',
+        version: 1,
+        criterios: [criterio],
+      );
+
+      expect(
+        () => provider.agregarVerificacion(verificacion),
+        throwsA(isA<Exception>()),
+      );
+    });
+
     // RN-11: No permite editar verificaciones aprobadas.
     test('No permite editar una verificación aprobada', () {
       final provider = ProyectoProvider();
