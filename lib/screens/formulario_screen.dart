@@ -132,7 +132,7 @@ class _FormularioScreenState extends State<FormularioScreen> {
             ),
             const SizedBox(height: 10),
             DropdownButtonFormField<String>(
-              value: _modeloSeleccionado,
+              initialValue: _modeloSeleccionado,
               decoration: const InputDecoration(labelText: 'Modelo', border: OutlineInputBorder()),
               items: _opcionesModelo.map((m) => DropdownMenuItem(value: m, child: Text(m))).toList(),
               onChanged: (v) {
