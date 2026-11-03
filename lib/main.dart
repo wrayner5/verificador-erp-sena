@@ -15,10 +15,17 @@ class MiApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Verificador ERP Cafeterías',
-      theme: ThemeData(primarySwatch: Colors.green),
-      home: const InicioScreen(),
-    );
+  debugShowCheckedModeBanner: false,
+  title: 'Cafetería SENA - Verificador ERP',
+  theme: ThemeData(
+    useMaterial3: true,
+    colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF39A900)),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Color(0xFF39A900),
+      foregroundColor: Colors.white,
+    ),
+  ),
+  home: const InicioScreen(),
+  );
   }
 }
