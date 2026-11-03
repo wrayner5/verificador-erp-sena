@@ -47,7 +47,7 @@ class InicioScreen extends StatelessWidget {
                           child: const Icon(Icons.assignment, color: Colors.white),
                         ),
                         title: Text('${v.modelo} (v${v.version})'),
-                        subtitle: Text('Verificador: ${v.verificador} - ${v.cumple}%'),
+                        subtitle: Text('Verificador: ${v.verificador} - ${v.cumplimiento}%'),
                         trailing: Text(v.estado),
                       );
                     },
