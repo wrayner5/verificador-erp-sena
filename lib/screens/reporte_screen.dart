@@ -34,6 +34,25 @@ class ReporteScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Estado del Proyecto: $estadoProyecto', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 20),
+            Expanded(
+              child: ListView.builder(
+                itemCount: ultimas.length,
+                itemBuilder: (context, index) {
+                  final v = ultimas[index];
+                  return Card(
+                    child: ListTile(
+                      title: Text(v.modelo),
+                      subtitle: Text('Estado: ${v.estado}'),
+                      trailing: CircularProgressIndicator(
+                        value: v.cumplimiento / 100,
+                        color: v.estado == 'Aprobado' ? Colors.green : Colors.orange,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
